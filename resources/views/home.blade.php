@@ -26,3 +26,5 @@
 @livewireScripts
 @stop
 
+{{-- removed students --}}
+
