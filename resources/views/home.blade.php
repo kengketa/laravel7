@@ -18,7 +18,7 @@
                         <span class="badge bg-warning">300</span>
                         <i class="fas fa-bullhorn"></i>
                     </a> --}}
-                    <livewire:counter>
+                    {{-- <livewire:counter> --}}
                 </div>
             </div>
         </div>

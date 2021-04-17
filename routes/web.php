@@ -17,11 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/posts', 'PostController@index')->name('posts');
+Route::get('/posts/create', 'PostController@create')->name('posts.create');
+Route::get('/posts/{id}/edit', 'PostController@edit')->name('posts.edit');
+Route::post('/posts/create', 'PostController@store')->name('posts.store');
 
-Auth::routes();
 
 Route::get('/home', function() {
     return view('home');
