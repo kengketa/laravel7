@@ -7,6 +7,7 @@ use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use UniSharp\LaravelFilemanager\Events\ImageIsUploading;
 use UniSharp\LaravelFilemanager\Events\ImageWasUploaded;
+use Illuminate\Support\Str;
 
 class LfmPath
 {
@@ -215,6 +216,7 @@ class LfmPath
     // Upload section
     public function upload($file)
     {
+        //dd($file);
         $this->uploadValidator($file);
         $new_file_name = $this->getNewName($file);
         $new_file_path = $this->setName($new_file_name)->path('absolute');
@@ -277,8 +279,12 @@ class LfmPath
 
     private function getNewName($file)
     {
+        //dd($file->getClientOriginalName());
+        $temp_name = Str::of($file->getClientOriginalName())->limit(150);
+        $temp_name = str_replace('%22', '', $temp_name);
+
         $new_file_name = $this->helper
-            ->translateFromUtf8(trim(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)));
+            ->translateFromUtf8(trim(pathinfo($temp_name, PATHINFO_FILENAME)));
 
         $extension = $file->getClientOriginalExtension();
 

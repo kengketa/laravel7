@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Log;
 use UniSharp\LaravelFilemanager\Events\ImageIsUploading;
 use UniSharp\LaravelFilemanager\Events\ImageWasUploaded;
 use UniSharp\LaravelFilemanager\Lfm;
+use Illuminate\Support\Str;
 
 class UploadController extends LfmController
 {
@@ -28,10 +29,11 @@ class UploadController extends LfmController
         $uploaded_files = request()->file('upload');
         $error_bag = [];
         $new_filename = null;
-
         foreach (is_array($uploaded_files) ? $uploaded_files : [$uploaded_files] as $file) {
+
             try {
                 $new_filename = $this->lfm->upload($file);
+
             } catch (\Exception $e) {
                 Log::error($e->getMessage(), [
                     'file' => $e->getFile(),
